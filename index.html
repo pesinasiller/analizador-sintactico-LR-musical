@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<title> analisis sintactico ascendente </title>
+<script src="gramatica.js"></script>
+<script src="analisis.js"></script>
+<script src="audio.js"></script>
+
+<body style="background-color:#439389;">
+
+    <div style="text-align:center;">
+        <span style="font-size:25px;font-weight:bold">Ejemplos:</span>
+        <br><br> S -> transportar [float] ( S )<br>
+        <strong>transportar 2.0 ( d e f 2.0 ) </strong>
+        <br><br> S -> acorde ( S ) <br>
+        <strong>acorde ( c e g ) </strong>
+        <br><br> S -> nota <br>
+        <strong>a </strong>
+        <br><br> S -> nota [float] <br>
+        <strong>a 2.2 </strong>
+        <br><br> S -> loop [int] ( S )<br>
+        <strong>loop 2 ( c e f ) d </strong>
+        <br><br> S -> S transportar [float] ( S ) <br>
+        <strong>c transportar 2.0 ( d e f ) </strong>
+        <br><br> S -> S loop [int] ( S ) <br>
+        <strong>b loop 3 ( c e ) d </strong>
+        <br><br> S -> S acorde ( S ) <br>
+        <strong>c a acorde ( c e g ) </strong>
+        <br><br> S -> S nota <br>
+        <strong>c d e f g a b </strong>
+        <br><br> S -> S nota [float] <br>
+        <strong>c transportar 2.0 ( d 2.0 ) </strong>
+        <br><br> entrada:
+
+        <br>
+        <textarea id="entrada"></textarea>
+        <br><br>
+        <button type="button" onclick="generarcodigo()">escuchar</button>
+    </div>
+</body>
+<script>
+    function generarcodigo() {
+        var entradaConEspacios = document.getElementById("entrada").value;
+        entrada = entradaConEspacios.split(" ");
+        entrada.push("$");
+        console.log(entrada);
+        var simbolos = analisis(entrada);
+        Instrumento.play(simbolos);
+
+    }
+</script>
+
+
+</html>
