@@ -1,112 +1,88 @@
+const context = new AudioContext();
+let startTime;
+const tempo = 80;
+const largoDeNota = (60 / tempo) / 2;
+const octava = 1;
+let banderaTiempoNormal;
+let tiempoInicialAcorde;       
+
+const playInput = (simbolos) => {
+    banderaTiempoNormal = 1;
+    tiempoInicialAcorde = 0;        
+    startTime = context.currentTime;
+    console.log(simbolos[0].instrucciones);
+    eval(simbolos[0].instrucciones);
+};
 
 //====================================================
 //|   obtiene frecuencia de la nota                  |
 //====================================================
-function getFreq(nota){
-  var frecuencia;
+const getFreq = (nota) => {
+  let frecuencia;
     switch(nota) {
-    case 'c':
-        frecuencia = 261.63;
-        break;
-    case 'd':
-        frecuencia = 293.66;
-        break;
-    case 'e':
-        frecuencia = 329.63;
-        break;
-    case 'f':
-        frecuencia = 349.23;
-        break;
-    case 'g':
-        frecuencia = 392;
-        break;
-    case 'a':
-        frecuencia = 440;
-    break;
-    case 'b':
-        frecuencia = 493.88
-    break;
-
-    case 'silencio':
-       frecuencia = 0;
+        case 'c':
+            frecuencia = 261.63;
+            break;
+        case 'd':
+            frecuencia = 293.66;
+            break;
+        case 'e':
+            frecuencia = 329.63;
+            break;
+        case 'f':
+            frecuencia = 349.23;
+            break;
+        case 'g':
+            frecuencia = 392;
+            break;
+        case 'a':
+            frecuencia = 440;
+            break;
+        case 'b':
+            frecuencia = 493.88;
+            break;
     }
   return frecuencia;
 }
 //====================================================
 
 
+//====================================================
+//|    función para reproducir las notas             |
+//====================================================
+const nota = (freq, orden, stopT = largoDeNota) => {
+    const startT = startTime + (orden * largoDeNota);
+    const oscillator = context.createOscillator();
+    oscillator.connect(context.destination);
+    oscillator.frequency.value = freq;
 
-var context = new AudioContext();
-var Instrumento = {};
+    oscillator.start(startT);
+    oscillator.stop(startT + stopT);
+}//===================================================
 
-Instrumento.play = function(simbolos) {
+//====================================================
+//|    función para transportar las notas            |
+//====================================================
 
-    var startTime = context.currentTime;
-    var tempo = 80;
-    var largoDeNota = (60 / tempo) / 2;
-    var stopTime = largoDeNota;
+const tansportar = (octava = 1, S) => {
+    S.inst(octava);
+}
+//===================================================
 
-    //====================================================
-    //|    función para reproducir las notas             |
-    //====================================================
-    function nota(freq, orden, stopT) {
-        var startT = startTime + (orden * largoDeNota);
-        var oscillator = context.createOscillator();
-        oscillator.connect(context.destination);
-        oscillator.frequency.value = freq;
+//====================================================
+//|    función para generar los acordes              |
+//====================================================
 
-        if (stopT === undefined || stopT === null) {
-            var stopT = stopTime;
-        }
-        oscillator.start(startT);
-        oscillator.stop(startT + stopT);
-    }//===================================================
+const acorde = (tiempoInicial, S) => {
+    S.inst(tiempoInicial, 0);
+}
+//===================================================
 
+//====================================================
+//|    función para generar los loops                |
+//====================================================
+const loop = (repeticiones, S) => {
+    S.inst(repeticiones);
+}
+//===================================================
 
-
-    //====================================================
-    //|    función para transportar las notas            |
-    //====================================================
-    var octava;
-    if (typeof(octava == 'undefined')) {
-        octava = 1;
-    }
-
-    function tansportar(octava, S) {
-        S.inst(octava);
-    }//===================================================
-
-    //====================================================
-    //|    función para generar los acordes              |
-    //====================================================
-    var banderaTiempoNormal;
-    if (typeof(banderaTiempoNormal == 'undefined')) {
-        banderaTiempoNormal = 1;
-    }
-    var tiempoInicialAcorde;
-    if (typeof(tiempoInicialAcorde == 'undefined')) {
-        tiempoInicialAcorde = 0;
-    }
-    function acorde(tiempoInicial, S) {
-        var banderaTiempoNormal = 0;
-        S.inst(tiempoInicial, banderaTiempoNormal);
-    }//===================================================
-
-    //====================================================
-    //|    función para generar los loops                |
-    //====================================================
-    function loop(repeticiones, S) {
-        S.inst(repeticiones);
-    }//===================================================
-
-
-
-
-
-    console.log(simbolos[0].instrucciones);
-    eval(simbolos[0].instrucciones);
-
-
-
-
-};

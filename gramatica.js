@@ -1,11 +1,8 @@
-
-var tabla = [];
+const tabla = [];
 
 for (i=0; i<=33;i++){
   tabla[i]=[];
 }
-
-
 
 tabla[0]['transportar']='s2';
 tabla[0]['acorde']='s3';
@@ -48,7 +45,6 @@ tabla[9]['nota']='r8';
 tabla[9]['loop']='r8';
 tabla[9]['$']='r8';
 
-
 tabla[10]['(']='s18';
 
 tabla[11]['transportar']='s2';
@@ -56,7 +52,6 @@ tabla[11]['acorde']='s3';
 tabla[11]['nota']='s4';
 tabla[11]['loop']='s5';
 tabla[11]['S']='19';
-
 
 tabla[12]['transportar']='r3';
 tabla[12][')']='r3';
@@ -84,13 +79,11 @@ tabla[17]['nota']='r9';
 tabla[17]['loop']='r9';
 tabla[17]['$']='r9';
 
-
 tabla[18]['transportar']='s2';
 tabla[18]['acorde']='s3';
 tabla[18]['nota']='s4';
 tabla[18]['loop']='s5';
 tabla[18]['S']='24';
-
 
 tabla[19]['transportar']='s6';
 tabla[19][')']='s25';
@@ -189,16 +182,14 @@ tabla[33]['nota']='r6';
 tabla[33]['loop']='r6';
 tabla[33]['$']='r6';
 
-
-
-var reglas = [];
-reglas[0] = ["S","S -> transportar [float] ( S )","5"];
-reglas[1] = ["S","S -> acorde ( S )","4"];
-reglas[2] = ["S","S -> nota","1"];
-reglas[3] = ["S","S -> nota [float]","2"];
-reglas[4] = ["S","S -> loop [int] ( S )","5"];
-reglas[5] = ["S","S -> S transportar [float] ( S )","6"];
-reglas[6] = ["S","S -> S loop [int] ( S )","6"];
-reglas[7] = ["S","S -> S acorde ( S )","5"];
-reglas[8] = ["S","S -> S nota","2"];
-reglas[9] = ["S","S -> S nota [float]","3"];
+const reglas = [];
+reglas[0] = ['S','S -> transportar [float] ( S )','5'];
+reglas[1] = ['S','S -> acorde ( S )','4'];
+reglas[2] = ['S','S -> nota','1'];
+reglas[3] = ['S','S -> nota [float]','2'];
+reglas[4] = ['S','S -> loop [int] ( S )','5'];
+reglas[5] = ['S','S -> S transportar [float] ( S )','6'];
+reglas[6] = ['S','S -> S loop [int] ( S )','6'];
+reglas[7] = ['S','S -> S acorde ( S )','5'];
+reglas[8] = ['S','S -> S nota','2'];
+reglas[9] = ['S','S -> S nota [float]','3'];
