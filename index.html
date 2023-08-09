@@ -1,84 +1,87 @@
 <!doctype html>
 <html>
-    <head>
-        <title> analisis sintactico ascendente </title>
-        <script src="gramatica.js"></script>
-        <script src="generacionDeCodigo.js"></script>
-        <script src="analisis.js"></script>
-        <script src="audio.js"></script>
-        <style>
-            body {
-                background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
-                color: white;
-                text-align: center;
-            }
-            i {
-                color: #ccc;
-            }
-            strong {
-                font-size: 22px;
-            }
-        </style>
-    </head>
 
-    <body>
-        <div>
-            <h2>Ejemplos:</h2>
-            <br><br> <i>S -> transportar [float] ( S )</i><br>
-            <strong>transportar 2.0 ( d e f 2.0 ) </strong><button type="button" onclick="generarcodigo('transportar 2.0 ( d e f 2.0 )')">escuchar</button>
-
-            <br><br><i> S -> acorde ( S )</i><br>
-            <strong>acorde ( c e g ) </strong><button type="button" onclick="generarcodigo('acorde ( c e g )')">escuchar</button>
-            
-            <br><br><i> S -> nota </i><br>
-            <strong>a </strong><button type="button" onclick="generarcodigo('a')">escuchar</button>
-            
-            <br><br><i> S -> nota [float] </i><br>
-            <strong>a 2.2 </strong><button type="button" onclick="generarcodigo('a 2.2')">escuchar</button>
-            
-            <br><br><i> S -> loop [int] ( S )</i><br>
-            <strong>loop 2 ( c e f ) d </strong><button type="button" onclick="generarcodigo('loop 2 ( c e f ) d')">escuchar</button>
-            
-            <br><br><i> S -> S transportar [float] ( S ) </i><br>
-            <strong>c transportar 2.0 ( d e f ) </strong><button type="button" onclick="generarcodigo('c transportar 2.0 ( d e f )')">escuchar</button>
-            
-            <br><br><i> S -> S loop [int] ( S )</i> <br>
-            <strong>b loop 3 ( c e ) d </strong><button type="button" onclick="generarcodigo('b loop 3 ( c e ) d')">escuchar</button>
-            
-            <br><br><i> S -> S acorde ( S )</i>  <br>
-            <strong>c a acorde ( c e g ) </strong><button type="button" onclick="generarcodigo('c a acorde ( c e g )')">escuchar</button>
-            
-            <br><br><i> S -> S nota </i> <br>
-            <strong>c d e f g a b </strong><button type="button" onclick="generarcodigo('c d e f g a b')">escuchar</button>
-            
-            <br><br><i> S -> S nota [float]</i>  <br>
-            <strong>c transportar 2.0 ( d 2.0 ) </strong><button type="button" onclick="generarcodigo('c transportar 2.0 ( d 2.0 )')">escuchar</button>
-            
-            <br><br> entrada:
-            <br>
-            <textarea id="entrada"></textarea>
-            <br><br>
-            <div id="resultado"></div>
-            <br>
-            <button type="button" id="boton-escuchar">escuchar</button>
-
-        </div>
-    </body>
-    <script>
-
-        const generarcodigo = (entrada) => {
-            document.getElementById('resultado').innerHTML = "";
-            const simbolos = analisis(entrada);
-            if (simbolos) {
-                playInput(simbolos);
-                document.getElementById('resultado').innerHTML = simbolos[0].instrucciones;
-            }
+<head>
+    <title> analisis sintactico ascendente </title>
+    <script src="gramatica.js"></script>
+    <script src="generacionDeCodigo.js"></script>
+    <script src="analisis.js"></script>
+    <script src="audio.js"></script>
+    <style>
+        body {
+            background: radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(252, 70, 107, 1) 100%);
+            color: white;
+            text-align: center;
         }
 
-        const generarCodigoDesdeTextInput = () => {
-            const cadenaEntrada = document.getElementById('entrada').value.replace("\n", "");
-            generarcodigo(cadenaEntrada);
+        i {
+            color: #ccc;
         }
-        document.getElementById('boton-escuchar').addEventListener('click', generarCodigoDesdeTextInput);
-    </script>
+
+        strong {
+            font-size: 22px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h2>Ejemplos:</h2>
+        <br><br> <i>S -> transportar [float] ( S )</i><br>
+        <strong>transportar 2.0 ( d e f 2.0 ) </strong><button type="button" onclick="generarcodigo('transportar 2.0 ( d e f 2.0 )')">escuchar</button>
+
+        <br><br><i> S -> acorde ( S )</i><br>
+        <strong>acorde ( c e g ) </strong><button type="button" onclick="generarcodigo('acorde ( c e g )')">escuchar</button>
+
+        <br><br><i> S -> nota </i><br>
+        <strong>a </strong><button type="button" onclick="generarcodigo('a')">escuchar</button>
+
+        <br><br><i> S -> nota [float] </i><br>
+        <strong>a 2.2 </strong><button type="button" onclick="generarcodigo('a 2.2')">escuchar</button>
+
+        <br><br><i> S -> loop [int] ( S )</i><br>
+        <strong>loop 2 ( c e f ) d </strong><button type="button" onclick="generarcodigo('loop 2 ( c e f ) d')">escuchar</button>
+
+        <br><br><i> S -> S transportar [float] ( S ) </i><br>
+        <strong>c transportar 2.0 ( d e f ) </strong><button type="button" onclick="generarcodigo('c transportar 2.0 ( d e f )')">escuchar</button>
+
+        <br><br><i> S -> S loop [int] ( S )</i> <br>
+        <strong>b loop 3 ( c e ) d </strong><button type="button" onclick="generarcodigo('b loop 3 ( c e ) d')">escuchar</button>
+
+        <br><br><i> S -> S acorde ( S )</i> <br>
+        <strong>c a acorde ( c e g ) </strong><button type="button" onclick="generarcodigo('c a acorde ( c e g )')">escuchar</button>
+
+        <br><br><i> S -> S nota </i> <br>
+        <strong>c d e f g a b </strong><button type="button" onclick="generarcodigo('c d e f g a b')">escuchar</button>
+
+        <br><br><i> S -> S nota [float]</i> <br>
+        <strong>c transportar 2.0 ( d 2.0 ) </strong><button type="button" onclick="generarcodigo('c transportar 2.0 ( d 2.0 )')">escuchar</button>
+
+        <br><br> entrada:
+        <br>
+        <textarea id="entrada"></textarea>
+        <br><br>
+        <div id="resultado"></div>
+        <br>
+        <button type="button" id="boton-escuchar">escuchar</button>
+
+    </div>
+</body>
+<script>
+    const generarcodigo = (entrada) => {
+        document.getElementById('resultado').innerHTML = "";
+        const simbolos = analisis(entrada);
+        if (simbolos) {
+            playInput(simbolos);
+            document.getElementById('resultado').innerHTML = simbolos[0].instrucciones;
+        }
+    }
+
+    const generarCodigoDesdeTextInput = () => {
+        const cadenaEntrada = document.getElementById('entrada').value.replace("\n", "");
+        generarcodigo(cadenaEntrada);
+    }
+    document.getElementById('boton-escuchar').addEventListener('click', generarCodigoDesdeTextInput);
+</script>
+
 </html>

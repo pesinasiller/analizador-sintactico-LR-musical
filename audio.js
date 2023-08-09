@@ -4,11 +4,11 @@ const tempo = 80;
 const largoDeNota = (60 / tempo) / 2;
 const octava = 1;
 let banderaTiempoNormal;
-let tiempoInicialAcorde;       
+let tiempoInicialAcorde;
 
 const playInput = (simbolos) => {
     banderaTiempoNormal = 1;
-    tiempoInicialAcorde = 0;        
+    tiempoInicialAcorde = 0;
     startTime = context.currentTime;
     console.log(simbolos[0].instrucciones);
     eval(simbolos[0].instrucciones);
@@ -18,8 +18,8 @@ const playInput = (simbolos) => {
 //|   obtiene frecuencia de la nota                  |
 //====================================================
 const getFreq = (nota) => {
-  let frecuencia;
-    switch(nota) {
+    let frecuencia;
+    switch (nota) {
         case 'c':
             frecuencia = 261.63;
             break;
@@ -42,7 +42,7 @@ const getFreq = (nota) => {
             frecuencia = 493.88;
             break;
     }
-  return frecuencia;
+    return frecuencia;
 }
 //====================================================
 
@@ -58,7 +58,7 @@ const nota = (freq, orden, stopT = largoDeNota) => {
 
     oscillator.start(startT);
     oscillator.stop(startT + stopT);
-}//===================================================
+} //===================================================
 
 //====================================================
 //|    función para transportar las notas            |
@@ -85,4 +85,3 @@ const loop = (repeticiones, S) => {
     S.inst(repeticiones);
 }
 //===================================================
-

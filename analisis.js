@@ -72,8 +72,11 @@ const analisis = (cadenaEntrada) => {
             //agrega un subíndice 1 si encuentra un segundo no-terminal S
             const subin = (typeof(simbolos[0]) !== 'undefined' && simbolos[0].id === 'S') ? 1 : 0;
 
-            ({ S, pasoSecuencia } = generacionDeCodigo(accion, pasoSecuencia, subin, reglas, simbolos, S));
-  
+            ({
+                S,
+                pasoSecuencia
+            } = generacionDeCodigo(accion, pasoSecuencia, subin, reglas, simbolos, S));
+
             // reduce los simbolos de la tabla de símbolos después de reducirlos por el no terminal
             for (let i = 0; i < reduce; i++) {
                 pila.pop();
