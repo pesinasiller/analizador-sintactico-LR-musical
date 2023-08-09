@@ -6,7 +6,7 @@ const generacionDeCodigo = (accion, pasoSecuencia, subin, reglas, simbolos, S) =
 
     const encontrarToken = tokenFilter(simbolos);
 
-    if (accion[1] === 0) { // si la regla a reducir es la 0: S -> transportar [float] ( S )
+    if (accion[1] === '0') { // si la regla a reducir es la 0: S -> transportar [float] ( S )
         var SArray = encontrarToken('S');
         var Suno = SArray[SArray.length-1]; //encuentra el no terminal S(1)
         var floatArray = encontrarToken('[float]');
@@ -25,7 +25,7 @@ const generacionDeCodigo = (accion, pasoSecuencia, subin, reglas, simbolos, S) =
         };
     }
 
-    if (accion[1] === 1) { // si la regla a reducir es la 1: S -> acorde ( S )
+    if (accion[1] === '1') { // si la regla a reducir es la 1: S -> acorde ( S )
         var SArray = encontrarToken('S');
         var Suno = SArray[SArray.length-1]; //encuentra el no terminal S(1)
         pasoSecuencia = Suno.comienza + 1; //reducir pasoSecuencia dependiendo del largo de S
@@ -42,7 +42,7 @@ const generacionDeCodigo = (accion, pasoSecuencia, subin, reglas, simbolos, S) =
         };
     }
 
-    if (accion[1] === 2) { // si la regla a reducir es la 2: S -> nota
+    if (accion[1] === '2') { // si la regla a reducir es la 2: S -> nota
         var notaArray = encontrarToken('nota');
         var nota = notaArray[notaArray.length-1]; // obtiene el valor de la más reciente nota
         pasoSecuencia++;
@@ -56,7 +56,7 @@ const generacionDeCodigo = (accion, pasoSecuencia, subin, reglas, simbolos, S) =
         };
     }
 
-    if (accion[1] === 3) { // si la regla a reducir es la 3: S -> nota [float]
+    if (accion[1] === '3') { // si la regla a reducir es la 3: S -> nota [float]
         var notaArray = encontrarToken('nota');
         var nota = notaArray[notaArray.length-1]; // obtiene el valor de la más reciente nota
         var floatArray = encontrarToken('[float]');
@@ -71,7 +71,7 @@ const generacionDeCodigo = (accion, pasoSecuencia, subin, reglas, simbolos, S) =
         };
     }
 
-    if (accion[1] === 4) { // si la regla a reducir es la 4: S -> loop [int] ( S )
+    if (accion[1] === '4') { // si la regla a reducir es la 4: S -> loop [int] ( S )
 
         var intArray = encontrarToken('[int]');
         var int = intArray[intArray.length-1];
@@ -95,7 +95,7 @@ const generacionDeCodigo = (accion, pasoSecuencia, subin, reglas, simbolos, S) =
         };
     }
 
-    if (accion[1] === 5) { // si la regla a reducir es la 5: S -> S transportar [float] ( S )
+    if (accion[1] === '5') { // si la regla a reducir es la 5: S -> S transportar [float] ( S )
 
         var SArray = encontrarToken('S');
         var Suno = SArray[SArray.length-2];
@@ -117,7 +117,7 @@ const generacionDeCodigo = (accion, pasoSecuencia, subin, reglas, simbolos, S) =
         };
     }
 
-    if (accion[1] === 6) { // si la regla a reducir es la 6: S -> S loop [int] ( S )
+    if (accion[1] === '6') { // si la regla a reducir es la 6: S -> S loop [int] ( S )
 
         var intArray = encontrarToken('[int]');
         var int = intArray[intArray.length-1];
@@ -127,7 +127,7 @@ const generacionDeCodigo = (accion, pasoSecuencia, subin, reglas, simbolos, S) =
         var Sdos = SArray[SArray.length-1];
 
         var longitud = Sdos.fin - Sdos.comienza;
-        console.log('longitud: ' + longitud);
+        console.log({longitud});
         var S = {
             id: reglas[accion[1]][0], //en nuestra gramática siempre es 'S'
             subindice: subin,
@@ -142,7 +142,7 @@ const generacionDeCodigo = (accion, pasoSecuencia, subin, reglas, simbolos, S) =
         };
     }
 
-    if (accion[1] === 7) { // si la regla a reducir es la 7: S -> S acorde ( S )
+    if (accion[1] === '7') { // si la regla a reducir es la 7: S -> S acorde ( S )
 
         var SArray = encontrarToken('S');
         var Suno = SArray[SArray.length-2];
@@ -162,7 +162,7 @@ const generacionDeCodigo = (accion, pasoSecuencia, subin, reglas, simbolos, S) =
         };
     }
 
-    if (accion[1] === 8) { // si la regla a reducir es la 8: S -> S nota
+    if (accion[1] === '8') { // si la regla a reducir es la 8: S -> S nota
 
         var SArray = encontrarToken('S');
         var Suno = SArray[SArray.length-1];
@@ -181,7 +181,7 @@ const generacionDeCodigo = (accion, pasoSecuencia, subin, reglas, simbolos, S) =
         };
     }
 
-    if (accion[1] === 9) { // si la regla a reducir es la 9: S -> S nota [float]
+    if (accion[1] === '9') { // si la regla a reducir es la 9: S -> S nota [float]
 
         var SArray = encontrarToken('S');
         var S = SArray[SArray.length-1];
@@ -202,5 +202,6 @@ const generacionDeCodigo = (accion, pasoSecuencia, subin, reglas, simbolos, S) =
             fin: pasoSecuencia + 1
         };
     }
+
     return { S, pasoSecuencia };
 }
