@@ -104,7 +104,6 @@ const analisis = (cadenaEntrada) => {
         } //========================================================================================================
 
         console.log('--------------------');
-
     }
     return simbolos; //regresa la tabla de simbolos que solo contiene el no terminal inicial
 }
